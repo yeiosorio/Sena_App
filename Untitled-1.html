@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	 <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDozbQMazwPToNV5fMHRFNtA0TwTEXXfb0&sensor=true">
+    </script>
+    <script type="text/javascript">
+	
+	var map
+	var marcador
+	function initialize() {
+        var mapOptions = {
+		 center: new google.maps.LatLng( 4.538907, -75.669837),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+		marcador = new google.maps.marker ({
+			position: latLng,
+			map:map
+			
+		})
+      }
+	  
+	  function mostrarUbicacion(){
+	  	
+		navigator.geolocation.getCurrentPosition(lecturaGPS, errorGPS , {enableHighAccuracy:true} )
+		
+	  }
+	  function lecturaGPS(ubicacion){
+	  	var miUbicacion = new google.maps.LatLng(ubicacion.coords.latitude , ubicacion.coords.longitude);
+		
+		map.setCenter(miUbicacion)
+		marcador.setPosition(miUbicacion)
+		
+	  }
+	  function errorGPS(){
+	  	alert("no puedo encontrarte(" )
+		
+	  }
+</script>
+	
+  </head>
+  <body onload="initialize()">
+			  <center><h1>Servicio de GPS</h1></center></div>
+			
+				<div id="map_canvas" style="width:100%; height:80%"></div>
+				<button onclick="mostrarUbicacion()">MI UBICACION</button>
+
+  </body>
+</html>
+
+
+
+
+
+
+
